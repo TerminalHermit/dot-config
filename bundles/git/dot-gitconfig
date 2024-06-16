@@ -1,0 +1,16 @@
+[core]
+	editor = vim
+[init]
+	defaultBranch = master
+[alias]
+    st = status -s
+    co = checkout
+    cod = checkout .
+    rh = reset HEAD
+    aa = add -A
+    ; local branch
+    br = branch
+    ; local and remote branches
+    bra = branch -a
+    pr = pull --rebase
+    amend = commit -a --amend --no-edit
