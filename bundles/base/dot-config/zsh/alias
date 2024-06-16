@@ -1,0 +1,10 @@
+chmod=chmod --preserve-root
+mkdir=mkdir -p
+ls=lsd -av
+lstree=lsd --tree
+vim=nvim
+back=cd -
+:q=exit
+randomkey=openssl rand -base64 128 | tr -d '\n'
+keybindings=bindkey -L
+persona='echo "configuration for directory: $(pwd)\nsystem: $(whoami)\ngit: $(git config user.name)<$(git config user.email)>"'

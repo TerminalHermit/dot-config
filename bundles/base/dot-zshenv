@@ -1,0 +1,13 @@
+export XDG_CONFIG_HOME="$HOME/.config"
+
+source "$XDG_CONFIG_HOME/user-dirs.dirs"
+
+export XDG_CACHE_HOME="$HOME/.local/cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSH_COMPDUMP="$XDG_CACHE_HOME/zcompdump-$HOST"
+export HISTFILE="$XDG_CACHE_HOME/zsh-history"
+
+export SSH_ASKPASS=/usr/bin/ksshaskpass
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
