@@ -1,6 +1,7 @@
 chmod=chmod --preserve-root
 mkdir=mkdir -p
 ls=lsd -av
+ll=lsd -lav
 lstree=lsd --tree
 vim=nvim
 pbcopy=xclip -i -sel c
@@ -9,4 +10,5 @@ back=cd -
 :q=exit
 randomkey=openssl rand -base64 128 | tr -d '\n'
 keybindings=bindkey -L
+zshconfig=vim "$ZDOTDIR/.zshrc"
 persona='echo "configuration for directory: $(pwd)\nsystem: $(whoami)\ngit: $(git config user.name)<$(git config user.email)>"'
