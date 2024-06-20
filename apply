@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+export SCRIPT_DIR=${0%/*}
+export BUNDLE_DIR="$SCRIPT_DIR/bundles"
+
+for bundle in $BUNDLE_DIR/*; do
+  if [ -d "$bundle" ]; then
+    dir=$(realpath -m --relative-to=${BUNDLE_DIR} $bundle)
+    echo "apply bundle $bundle"
+    #todo handle possible file conficts...
+    stow -d $BUNDLE_DIR -t $HOME --dotfiles $dir
+  fi
+done

@@ -2,7 +2,6 @@
 
 ZSHRC_DIR="${0:A:h}"
 
-# caching
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -16,14 +15,13 @@ if [ ! -d "$ZINIT_HOME" ]; then
    mkdir -p "$(dirname $ZINIT_HOME)"
    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
+source "${ZINIT_HOME}/zinit.zsh"
+
 export TPM_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/tmux/tpm.git"
 if [ ! -d "$TPM_HOME" ]; then
    mkdir -p "$(dirname $TPM_HOME)"
    git clone https://github.com/tmux-plugins/tpm.git "$TPM_HOME"
 fi
-source "${ZINIT_HOME}/zinit.zsh"
-
-#TODO NVIM load
 
 #Plugins
 zinit ice depth=1
@@ -32,6 +30,8 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+
+zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
 
 #Snippets
 zinit snippet OMZP::git
@@ -70,11 +70,6 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-
 # Aliases
 while IFS='=' read -r alias command; do 
   if [[ -n $alias && -n $command ]]; then
@@ -84,7 +79,14 @@ while IFS='=' read -r alias command; do
 done < "$ZSHRC_DIR/alias"
 
 # Shell integrations
-#TODO source only if command available
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-source <(kubectl completion zsh)
+if command -v fzf > /dev/null 2>&1; then
+    eval "$(fzf --zsh)"
+fi
+
+if command -v zoxide > /dev/null 2>&1; then
+    eval "$(zoxide init --cmd cd zsh)"
+fi
+
+if command -v kubectl > /dev/null 2>&1; then
+    source <(kubectl completion zsh)
+fi
