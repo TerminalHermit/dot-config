@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-ZSHRC_DIR="${0:A:h}"
+ZSHRC_DIR="${ZDOTDIR}"
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -35,7 +35,6 @@ zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
 
 #Snippets
 zinit snippet OMZP::git
-zinit snippet OMZP::procs
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::dotenv
 zinit snippet OMZP::command-not-found
@@ -74,7 +73,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 while IFS='=' read -r alias command; do 
   if [[ -n $alias && -n $command ]]; then
     alias $alias=$command
-    echo "Alias created: $alias='$command'"
+    #echo "Alias created: $alias='$command'"
   fi
 done < "$ZSHRC_DIR/alias"
 
@@ -90,3 +89,4 @@ fi
 if command -v kubectl > /dev/null 2>&1; then
     source <(kubectl completion zsh)
 fi
+
