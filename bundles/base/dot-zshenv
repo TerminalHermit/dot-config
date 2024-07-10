@@ -16,4 +16,5 @@ if command -v ksshaskpass > /dev/null 2>&1; then
     export SSH_ASKPASS=$(command -v ksshaskpass)
 fi
 
+export GOPATH="$XDG_CONFIG_HOME/.libs/go"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
