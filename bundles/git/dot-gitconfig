@@ -14,3 +14,8 @@
     bra = branch -a
     pr = pull --rebase
     amend = commit -a --amend --no-edit
+[user]
+	email = commit@terminalhermit.dev
+	name = TerminalHermit
+[push]
+	autoSetupRemote = true
