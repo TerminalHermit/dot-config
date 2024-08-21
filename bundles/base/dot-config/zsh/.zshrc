@@ -90,3 +90,17 @@ if command -v kubectl > /dev/null 2>&1; then
     source <(kubectl completion zsh)
 fi
 
+# binding fixups
+
+bindkey "^[[3~" delete-char
+
+# alt + f/b
+bindkey "^[f" forward-word
+bindkey "^[b" backward-word
+
+# horizontal arrow navigation
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+bindkey "^[[1;6C" end-of-line
+bindkey "^[[1;6D" beginning-of-line
