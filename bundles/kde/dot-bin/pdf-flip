@@ -1,0 +1,44 @@
+#!/bin/bash
+
+usage() {
+    echo "pdf-flip: $0 <filename> <direction>"
+    echo "direction: left, right, flip"
+    exit 1
+}
+
+if [ $# -ne 2 ]; then
+    usage
+fi
+
+filepath="$1"
+dirpath=$(dirname "$filepath")
+filename=$(basename "$filepath")
+basename="${filename%.*}"
+extension="${filename##*.}"
+direction="$2"
+
+cd $dirpath
+
+if [ ! -f "$filename" ]; then
+    echo "Error: File '$filename' not found."
+    exit 1
+fi
+
+
+case "$direction" in
+    left)
+        pdftk $filename cat 1-endwest output $basename-left-$extension
+        ;;
+    right)
+        pdftk $filename cat 1-endeast output $basename-right-$extension
+        ;;
+    flip)
+        pdftk $filename cat 1-endsouth output $basename-flipped-$extension
+        ;;
+    *)
+        echo "invalid direction: $direction"
+        usage
+        ;;
+esac
+
+
