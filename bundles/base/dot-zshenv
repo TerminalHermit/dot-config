@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 export XDG_CONFIG_HOME="$HOME/.config"
 
 if [ -f "$XDG_CONFIG_HOME/user-dirs.dirs" ]; then
@@ -16,5 +17,18 @@ if command -v ksshaskpass > /dev/null 2>&1; then
     export SSH_ASKPASS=$(command -v ksshaskpass)
 fi
 
-export GOPATH="$XDG_CONFIG_HOME/.libs/go"
+LINK_DIR=~/.libs/PATH_INCLUDE
+for link in $LINK_DIR/*; do
+  if [ -L "$link" ]; then
+    target="$LINK_DIR/$(readlink "$link")"
+    if [ -d "$target" ]; then
+      if [[ ":$PATH:" != *":$target:"* ]]; then
+        export PATH="$target:$PATH"
+      fi
+    fi
+  fi
+done
+export PATH="$HOME/.bin/:$PATH"
+export GOPATH="$HOME/.libs/go"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export VIRSH_DEFAULT_CONNECT_URI=qemu:///system
