@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Service
+Icon=smiley-shape
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/pdf;
+Actions=rotateFlip;rotateLeft;rotateRight
+X-KDE-Submenu=PDF Rotation
+Encoding=UTF-8
+
+[Desktop Action rotateLeft]
+Name=Rotate Left
+Icon=smiley-shape
+Exec=pdf-flip %f left
+
+
+[Desktop Action rotateRight]
+Name=Rotate Right
+Icon=smiley-shape
+Exec=pdf-flip %f right
+
+[Desktop Action rotateFlip]
+Name=Flip
+Icon=smiley-shape
+Exec=pdf-flip %f flip
+
